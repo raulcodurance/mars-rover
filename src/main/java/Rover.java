@@ -1,20 +1,35 @@
 public class Rover {
-    private Position positionAndHeading;
+    private Location location;
 
-    public Rover(Position initialCoordinatesAndHeading) {
+    public Rover(Location initialCoordinatesAndHeading) {
 
-        this.positionAndHeading = initialCoordinatesAndHeading;
+        this.location = initialCoordinatesAndHeading;
     }
 
-    public String positionAndHeading() {
-        return positionAndHeading.toString();
+    public String location() {
+        return location.toString();
     }
 
     public void followCommands(String commands) {
 
-        if("M".equals(commands) && positionAndHeading.isHeadingNorth()){
+        if("M".equals(commands) && location.isHeadingNorth()){
 
-        this.positionAndHeading = new Position("1 3 N");
+        this.location = location.moveNorth();
+        }
+
+        if("M".equals(commands) && location.isHeadingSouth()){
+
+            this.location = location.moveSouth();
+        }
+
+        if("M".equals(commands) && location.isHeadingWest()){
+
+            this.location = location.moveWest();
+        }
+
+        if("L".equals(commands) && location.isHeadingNorth()){
+
+                this.location = location.rotateLeft();
         }
     }
 }
